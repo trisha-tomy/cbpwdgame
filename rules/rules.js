@@ -1,17 +1,16 @@
 import Rule from "./Rule";
 import RuleWordle from "./RuleWordle/RuleWordle";
 import RuleMorse from "./RuleMorse/RuleMorse";
-import RuleRiddle from "./RuleRiddle/RuleRiddle";
-import RuleLocation from "./RuleLocation/RuleLocation";
 import RuleTimeEmoji from "./RuleTimeEmoji/RuleTimeEmoji";
 import RuleImages from "./RuleImages/RuleImages";
 import RuleSum from "./RuleSum/RuleSum";
 import RuleEarthquake from "./RuleEarthquake/RuleEarthquake";
 import RuleRickroll from "./RuleRickroll/RuleRickroll";
+import Rule3Idiots from "./Rule3Idiots/Rule3Idiots";
+import RuleMarauders from "./RuleMarauders/RuleMarauders";
 
 
 var rules = [
-
     new RuleRickroll(),
 
     new Rule(
@@ -69,42 +68,11 @@ var rules = [
 
     new RuleRickroll(), 
 
-    new Rule( 
-        "Your password must contain all the english vowels.",
-        (t) => /a/i.test(t) && /e/i.test(t) && /i/i.test(t) && /o/i.test(t) && /u/i.test(t)
-    ),
-    new Rule(
-        "Your password must include 2-digit prime number.",
-        (t) => /(?:11)|(?:13)|(?:17)|(?:19)|(?:23)|(?:29)|(?:31)|(?:37)|(?:41)|(?:43)|(?:47)|(?:53)|(?:59)|(?:61)|(?:67)|(?:71)|(?:73)|(?:79)|(?:83)|(?:89)|(?:97)/.test(t)
-    ),
-    
-    new Rule( 
-        "Your password must include the name of \"The power house of the cell\". \u{1F9A0}", //&#x1F9A0;
-        (t) => /(?:mitochondria)|(?:mitochondrion)/i.test(t)
-    ),
-    new Rule( 
-        "Your password must include the name of a continent.",
-        (t) => /asia|europe|africa|australia|oceania|north america|south america|antarctica/i.test(t)
-    ),
+    new Rule3Idiots(),
 
-    
-    
-    
-    
-    // new RuleQR(),
-    
     new RuleImages(),
-    new RuleLocation(),
-    new RuleRiddle(),
 
-    new Rule(
-        "Your password must include the length of your password.",
-        (t) => {
-            let l = t.length;
-            let r = new RegExp(`${l}`);
-            return r.test(t);
-        }
-    )
+    new RuleMarauders()
 ];
 
 function sort_rules(a, b){
