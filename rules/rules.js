@@ -8,10 +8,31 @@ import RuleTimeEmoji from "./RuleTimeEmoji/RuleTimeEmoji";
 import RuleQR from "./RuleQR/RuleQR";
 import RuleSum from "./RuleSum/RuleSum";
 import RuleEarthquake from "./RuleEarthquake/RuleEarthquake";
+import RuleRickroll from "./RuleRickroll/RuleRickroll";
 
 
 var rules = [
-    new Rule( 
+    new Rule(
+        "Your password must contain the first name of at least one CB founder.",
+        (t) => /pooja|nishtha|gaurisha|abhigya/i.test(t)
+    ),
+
+    new Rule(
+        "Your password must contain the name of a metro station 3 stations away from Kashmere Gate.",
+        (t) => /new delhi|newdelhi|vishwavidyalaya|delhi gate|delhigate|welcome|pratap nagar|pratapnagar/i.test(t)
+    ),
+
+    new Rule(
+        "Your password must contain the number of projects mentioned on the CB website.",
+        (t) => /35/.test(t)
+    ),
+
+    new Rule(
+        "Your password must be at least 6 characters.",
+        (t) => t?.length >= 6
+    ),
+    
+    new Rule(
         "Your password must be at least 6 characters.",
         (t) => t?.length >= 6
     ),
@@ -49,6 +70,7 @@ var rules = [
         (t) => /(?:3\.14159)/.test(t)
     ),    
     
+    new RuleRickroll(), 
     new RuleTimeEmoji(),
     new RuleWordle(),
     new RuleEarthquake(),
