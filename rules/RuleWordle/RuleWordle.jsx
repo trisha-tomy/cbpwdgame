@@ -1,44 +1,33 @@
 import Rule from "../Rule";
 
+const wordleLinks = [
+    { url: "https://mywordle.strivemath.com/?word=euuwfa", solution: "igdtuw" },
+    { url: "https://mywordle.strivemath.com/?word=cocdic", solution: "galaxy" },
+    { url: "https://mywordle.strivemath.com/?word=ycjpzw", solution: "cosmos" },
+    { url: "https://mywordle.strivemath.com/?word=ycdhew", solution: "comets" },
+    { url: "https://mywordle.strivemath.com/?word=wiirce", solution: "aurora" },
+    { url: "https://mywordle.strivemath.com/?word=iskhzv", solution: "meteor" },
+    { url: "https://mywordle.strivemath.com/?word=lzrvxe", solution: "plasma" },
+    { url: "https://mywordle.strivemath.com/?word=lzrqpx", solution: "planet" },
+    { url: "https://mywordle.strivemath.com/?word=lvfwzr", solution: "photon" }
+];
 
-async function get_todays_wordle(){
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth()+1;
-    let day = date.getDate();
-
-    let url = `https://www.nytimes.com/svc/wordle/v2/${year}-${("0"+month).slice(-2)}-${("0"+day).slice(-2)}.json`;
-    url = 'https://corsproxy.io/?' + encodeURIComponent(url);   // CORS proxy
-
-    const options = {
-        method: 'GET',
-    };
-
-    let response = await fetch(url, options);
-    let json = await response.json();
-
-    return json.solution;
+function get_random_wordle(){
+    const randomIndex = Math.floor(Math.random() * wordleLinks.length);
+    return wordleLinks[randomIndex];
 }
-
-
 
 export default class RuleWordle extends Rule{
     constructor(){
-        // super("Your password must contain today's Wordle answer.");
-        super("Your password must contain today's ");
-
-        get_todays_wordle()
-            .then(solution => this.solution = solution)
-            .catch((error) => {
-                console.log(error)
-            });
-
-        this.renderItem = () => <span><a href="https://www.nytimes.com/games/wordle/index.html" target="_blank">Wordle</a> answer.</span>
-
+        super("Your password must contain the answer to this Wordle (Hint: think CB and IGDTUW ;) )");
+        
+        let selectedWordle = get_random_wordle();
+        this.solution = selectedWordle.solution;
+        
+        this.renderItem = () => <span><a href={selectedWordle.url} target="_blank">Wordle</a> answer.</span>;
     }
 
     check(txt){
-        // console.log("check", this.solution)
         let r = new RegExp(`(${this.solution})`, "i");
         return r.test(txt); 
     }
