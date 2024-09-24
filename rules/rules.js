@@ -1,11 +1,11 @@
 import Rule from "./Rule";
 import RuleWordle from "./RuleWordle/RuleWordle";
-import RuleSlidingPuzzle from "./RuleSlidingPuzzle/RuleSlidingPuzzle";
 import RuleMorse from "./RuleMorse/RuleMorse";
 import RuleRiddle from "./RuleRiddle/RuleRiddle";
 import RuleLocation from "./RuleLocation/RuleLocation";
 import RuleTimeEmoji from "./RuleTimeEmoji/RuleTimeEmoji";
 import RuleQR from "./RuleQR/RuleQR";
+import RuleImages from "./RuleImages/RuleImages";
 import RuleSum from "./RuleSum/RuleSum";
 import RuleEarthquake from "./RuleEarthquake/RuleEarthquake";
 
@@ -52,15 +52,15 @@ var rules = [
     new RuleTimeEmoji(),
     new RuleWordle(),
     new RuleEarthquake(),
-    new RuleQR(),
+    // new RuleQR(),
     new RuleMorse(),
+    new RuleImages(),
     new RuleLocation(),
     new RuleRiddle(),
     new Rule(
         "Your password must have as many vowels as consonants.",
         (t) => (t.match(/[aeiou]/ig) || []).length === (t.match(/[bcdfghjklmnpqrstvwxys]/ig) || []).length
     ),
-    new RuleSlidingPuzzle(),
     new Rule(
         "Your password must include the length of your password.",
         (t) => {
