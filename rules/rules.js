@@ -4,7 +4,6 @@ import RuleMorse from "./RuleMorse/RuleMorse";
 import RuleRiddle from "./RuleRiddle/RuleRiddle";
 import RuleLocation from "./RuleLocation/RuleLocation";
 import RuleTimeEmoji from "./RuleTimeEmoji/RuleTimeEmoji";
-import RuleQR from "./RuleQR/RuleQR";
 import RuleImages from "./RuleImages/RuleImages";
 import RuleSum from "./RuleSum/RuleSum";
 import RuleEarthquake from "./RuleEarthquake/RuleEarthquake";

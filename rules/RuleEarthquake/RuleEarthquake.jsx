@@ -3,7 +3,7 @@ import Rule from "../Rule";
 
 export default class RuleEarthquake extends Rule{
     constructor(){
-        super("Oh no! there is an earthquake! Get your password to safety! Add this chair to your password and put the rest of your password below it.");
+        super("Oh no! there is an earthquake! Get your password to safety! Launch off the surface of the earth by placing your password after this rocket 🚀");
         this.renderItem = ({pswd, setPswd, shakePasswordBox, correct}) => {
             return (
                 <Earthquake 
@@ -17,7 +17,7 @@ export default class RuleEarthquake extends Rule{
     }
 
     check(txt){
-        return /^[\u{1FA91}]+\n/u.test(txt); // check for chair unicode
+        return /^[\u{1F680}]+/u.test(txt); 
     }
 
 }
@@ -80,9 +80,7 @@ function Earthquake({pswd, setPswd, shakePasswordBox, correct}){
 
     
     return (
-        <div style={{fontWeight: "bold", fontSize: "50px", textAlign:"center"}}>
-            {"\u{1FA91}"}
-        </div>
+        <div style={{fontWeight: "bold", fontSize: "50px", textAlign:"center"}}></div>
     )
 
 }
