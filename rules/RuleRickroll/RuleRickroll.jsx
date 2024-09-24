@@ -1,22 +1,21 @@
 import Rule from "../Rule";
 
-export default class RuleRickroll extends Rule{
-    constructor(){
-        super("Your password must contain the name of this memorable moment from the link.");
+export default class RuleRickroll extends Rule {
+    constructor() {
+        super("Within this ");
 
-        this.solution = "rickroll"; // The answer is "rickroll"
-        
+        this.solution = "rickroll";  // The correct answer is "rickroll"
+
+        // Make the word 'link' clickable and redirect to the Rickroll video
         this.renderItem = () => (
             <span>
-                <a href="https://youtu.be/dQw4w9WgXcQ?si=CCeAzh3ucErpI3Iw" target="_blank">
-                    Watch this memorable moment here
-                </a>.
+                <a href="https://bit.ly/cb-exp-24" target="_blank">link</a> lies a memorable experience. To proceed, your password must feature the name of that moment.
             </span>
         );
     }
 
-    check(txt){
+    check(txt) {
         let r = new RegExp(`(${this.solution})`, "i");
-        return r.test(txt);
+        return r.test(txt); 
     }
 }
