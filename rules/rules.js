@@ -11,8 +11,6 @@ import RuleMarauders from "./RuleMarauders/RuleMarauders";
 
 
 var rules = [
-    new RuleRickroll(),
-
     new Rule(
         "Your password must be at least 6 characters.",
         (t) => t?.length >= 6

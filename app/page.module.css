@@ -1,20 +1,23 @@
-.container{
+.container {
     width: 576px;
     max-width: calc(100% - 20px);
     margin: 0 auto;
     padding: 5px;
     min-height: calc(100vh - 50px);
+    background: rgba(255, 255, 255, 0); /* Semi-transparent for cosmic effect */
+    border-radius: 15px; /* Rounded corners for a softer look */
 }
 
-.footer{
+.footer {
+    font-family: 'Equinox', sans-serif; /* Using Equinox font for headings */
     font-size: 12px;
     width: 100%;
-    color: #151515;
+    color: #EAEAEA; /* Light color for readability */
     text-align: center;
     padding-bottom: 2px;
 }
 
-.title{
+.title {
     text-align: center;
     display: grid;
     align-items: center;
@@ -23,14 +26,18 @@
     margin-top: 20px;
     margin-bottom: 40px;
 }
-.title_text{
+
+.title_text {
+    font-family: 'Equinox', sans-serif; /* Using Equinox font for headings */
     font-size: 28px;
     font-weight: bold;
-    color: #533ea5;
+    color: #ffffff; 
 }
-.introduction{
+
+.introduction {
     text-align: center;
     font-size: 15px;
     margin-top: 50px;
     margin-bottom: 60px;
+    color: #020000; /* Light color for readability */
 }

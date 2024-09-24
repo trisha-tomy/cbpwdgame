@@ -49,12 +49,13 @@ function PasswordBox(props, ref) {
 
     return ( 
         <>
-            <div className="pswdbox_label">
-                Choose a password
-                <span className="psswd_len">
-                    {pswd.length}
-                </span>
-            </div>
+        <div className="pswdbox_label" style={{ color: 'white' }}>
+            Choose a password:
+            <span className="psswd_len" style={{ color: 'white' }}>
+                {pswd.length}
+            </span>
+        </div>
+
             <textarea 
                 id="pswdbox"
                 className="pswdbox"

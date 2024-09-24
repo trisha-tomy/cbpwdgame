@@ -4,40 +4,43 @@
     font-size: 16px;
     margin: 22px auto;
     overflow: hidden;
-
-    /* background-color: #ffdce0; */
+    border-radius: 10px;
     background-color: #ffeced;
     border: 2px solid #CE273D;
-    box-shadow: 8px 8px 1px 0px rgba(222, 184, 189, 0.4);
-
-    transition: background-color 0.5s;
+    transition: background-color 0.5s, box-shadow 0.5s; /* Added box-shadow to transition */
 }
+
 .rulebox:hover {
-    box-shadow: 10px 10px 1px 0px rgba(222, 184, 189, 0.5);
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.7); /* White halo effect */
 }
-.rulebox-top {
-    padding: 5px 16px 8px 8px;
 
+.rulebox-top {
+    padding: 10px 16px 8px 8px;
     background-color: #fabac4;
     color: #a11a2c;
     font-weight: bold;
     font-size: 15px;
-
     transition: background-color 0.5s;
+    font-family: "Montserrat"; 
+
 }
 
 .rulebox-desc {
     padding: 11px 17px 15px 11px;
+    font-family: "Montserrat"; 
+
+    
 }
 
 .rulebox.rule-correct {
     background-color: #deffce;
     border: 2px solid #52A22A;
-    box-shadow: 8px 8px 1px 0px rgba(167, 187, 157, 0.4);
 }
+
 .rulebox.rule-correct:hover {
-    box-shadow: 10px 10px 1px 0px rgba(167, 187, 157, 0.5);
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.7); /* White halo effect for correct rulebox */
 }
+
 .rulebox-top.rule-correct {
     background-color: #b4ea99;
     color: #32621a;
