@@ -76,7 +76,7 @@ var rules = [
     new RuleImages(),
 
     new Rule( 
-        "Your password must include what you experience when you miss out on joining Celestial Biscuit. - fomo",
+        "Your password must include what you experience when you miss out on joining Celestial Biscuit.",
         (t) => /fomo|fearofmissingout/i.test(t)
     ),
 
