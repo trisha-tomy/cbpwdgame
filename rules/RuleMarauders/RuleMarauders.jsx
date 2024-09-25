@@ -5,7 +5,7 @@ export default class RuleMarauders extends Rule {
         super("Your password must include the phrase to close this map.");
 
         this.imageUrl = "/maraudersmap.webp"; 
-        this.solution = ["mischiefmanaged"]; 
+        this.solution = ["mischiefmanaged", "mischief managed"]; 
         
         this.renderItem = () => (
             <span>

@@ -66,9 +66,19 @@ var rules = [
 
     new RuleRickroll(), 
 
+    new Rule( 
+        "Your password must contain what we wear on Wednesdays.",
+        (t) => /pink/i.test(t)
+    ),
+
     new Rule3Idiots(),
 
     new RuleImages(),
+
+    new Rule( 
+        "Your password must include what you experience when you miss out on joining Celestial Biscuit. - fomo",
+        (t) => /fomo|fearofmissingout/i.test(t)
+    ),
 
     new RuleMarauders()
 ];
