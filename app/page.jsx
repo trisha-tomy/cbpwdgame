@@ -148,7 +148,10 @@ export default function Home(){
 
         </div>
         <footer className={styles.footer}>
-        CELESTIAL BISCUIT IGDTUW ⓒ 2024
+        CELESTIAL BISCUIT IGDTUW ⓒ 2024 <br/>
+        This site is inspired by&nbsp;
+            <a href="https://neal.fun/password-game/" target="_blank">The Password Game</a> and &nbsp; 
+            <a href="https://quirkylock.netlify.app/" target="_blank">QuirkyLock</a> <br/>
         </footer>
         </>
       )
