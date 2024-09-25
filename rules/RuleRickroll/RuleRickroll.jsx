@@ -4,7 +4,7 @@ export default class RuleRickroll extends Rule {
     constructor() {
         super("Within this ");
 
-        this.solution = "rickroll";  // The correct answer is "rickroll"
+        this.solution = ["rickroll", "rick roll"] ;  // The correct answer is "rickroll"
 
         // Make the word 'link' clickable and redirect to the Rickroll video
         this.renderItem = () => (
