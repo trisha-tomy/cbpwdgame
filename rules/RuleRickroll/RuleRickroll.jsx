@@ -4,7 +4,7 @@ export default class RuleRickroll extends Rule {
     constructor() {
         super("Within this ");
 
-        this.solution = ["rickroll", "rick roll"] ;  // The correct answer is "rickroll"
+        this.solution = ["rickroll", "rick roll"];  // The correct answer is "rickroll"
 
         // Make the word 'link' clickable and redirect to the Rickroll video
         this.renderItem = () => (
@@ -15,7 +15,6 @@ export default class RuleRickroll extends Rule {
     }
 
     check(txt) {
-        let r = new RegExp(`(${this.solution})`, "i");
-        return r.test(txt); 
+        return this.solution.some(word => word.toLowerCase() === txt.toLowerCase());
     }
 }
