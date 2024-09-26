@@ -1,0 +1,82 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .authContainer {
+    background: rgba(255, 250, 255, 0.1);
+    border-radius: 15px;
+    padding: 40px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .title {
+    font-family: 'Equinox', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .introduction {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 30px;
+    color: #000000;
+  }
+  
+  .button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: dodgerblue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .button:hover {
+    background-color: #1e90ff;
+    transform: scale(1.05);
+  }
+  
+  .footer {
+    font-family: 'Equinox', sans-serif;
+    font-size: 12px;
+    color: #000000;
+    text-align: center;
+    padding-top: 20px;
+  }
+  
+  @media (max-width: 600px) {
+    .authContainer {
+      padding: 20px;
+    }
+  
+    .title {
+      font-size: 24px;
+    }
+  
+    .introduction {
+      font-size: 14px;
+    }
+  
+    .button {
+      font-size: 14px;
+    }
+  }
