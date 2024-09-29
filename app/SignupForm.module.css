@@ -1,94 +1,139 @@
-@font-face {
-  font-family: "Equinox";
-  src: url('./FontsFree-Net-EquinoxRegular.ttf') format('truetype');
-  font-weight: normal;
-}
+/* SignupForm.module.css */
 
-@font-face {
-  font-family: "Montserrat";
-  src: url('./montserrat-v25-latin-regular.ttf');
-}
-
+/* Container and form wrapper styles */
 .container {
-  width: 576px;
-  max-width: calc(100% - 20px);
-  margin: 0 auto;
-  padding: 5px;
-  min-height: calc(100vh - 50px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
 }
 
-.formContainer {
-  background: rgba(255, 255, 255, 0.1);
+.formWrapper {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(20, 20, 30, 0.8);
+  /* Same background tone as the original */
   border-radius: 15px;
   padding: 40px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.2);
+  /* Match shadow from the original */
+  backdrop-filter: blur(15px);
+  /* Match blur effect */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .title {
-  font-family: 'Equinox', sans-serif;
-  font-size: 28px;
+  font-family: 'Orbitron', sans-serif;
+  /* Matching font from the original */
+  font-size: 30px;
+  /* Adjusted to match the original */
   font-weight: bold;
-  color: #ffffff;
+  color: #f0f0f0;
+  /* White color consistent with original */
   text-align: center;
   margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.3);
+  /* Same glow effect */
 }
 
+/* Input and Select Fields */
 .input,
-.select {
-  width: 100%;
-  padding: 10px;
+.button {
+  width: 94%;
+  max-width: 400px;
+  padding: 12px;
   margin: 10px 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  /* Consistent border color */
+  border-radius: 8px;
   font-size: 14px;
   background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  font-family: 'Montserrat', sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  ;
+  font-family: 'Quicksand', sans-serif;
+  /* Matching font */
 }
 
+/* Placeholder and select styling */
 .input::placeholder,
-.select::placeholder {
+.select option {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.select {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Styling for inline fields */
+.inlineFields {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  gap: 10px;
+}
+
+.inlineField {
+  flex: 1;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Quicksand', sans-serif;
+  /* Matching font */
+}
+
+/* Submit button styling */
 .button {
   width: 100%;
-  padding: 10px;
+  max-width: 400px;
+  padding: 12px;
   margin-top: 20px;
   font-size: 16px;
   color: #ffffff;
-  background-color: rgba(30, 144, 255, 0.7);
+  background-color: #2a3d55;
+  /* Deeper celestial blue from original */
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
-  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 0 10px rgba(42, 61, 85, 0.5);
+  /* Match the glowing effect */
 }
 
 .button:hover {
-  background-color: rgba(30, 144, 255, 0.9);
+  background-color: #355273;
+  /* Lighter blue on hover */
   transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(53, 82, 115, 0.7);
 }
 
+/* Footer styling */
 .footer {
-  font-family: 'Equinox', sans-serif;
-  font-size: 12px;
-  color: #EAEAEA;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  color: #a0a0a0;
   text-align: center;
-  padding-bottom: 2px;
+  padding-top: 20px;
+  text-shadow: 0 0 5px rgba(160, 160, 160, 0.5);
+  z-index: 1;
 }
 
+/* Responsive adjustments */
 @media (max-width: 600px) {
-  .container {
-    padding: 10px;
-  }
-
-  .formContainer {
+  .formWrapper {
     padding: 20px;
+    margin: auto;
+    width: 80%;
   }
 
   .title {
@@ -99,5 +144,10 @@
   .select,
   .button {
     font-size: 14px;
+  }
+
+  .inlineFields {
+    flex-direction: column;
+    gap: 0;
   }
 }

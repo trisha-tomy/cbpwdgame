@@ -1,10 +1,13 @@
+// SignupForm.js
+
 import { useState, useEffect } from 'react';
-import { db, auth } from '../utils/firebaseConfig'; // Import Firebase config and auth
+import { db, auth } from '../utils/firebaseConfig';
 import { useRouter } from 'next/router';
-import { collection, doc, setDoc, getDoc } from 'firebase/firestore'; // Import functions from Firestore
-import { onAuthStateChanged, signOut } from 'firebase/auth'; // Import to listen to authentication state and sign out
+import { collection, doc, setDoc, getDoc } from 'firebase/firestore';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import styles from '../app/SignupForm.module.css';
-import "../app/globals.css"
+import Head from 'next/head';
+import "../app/globals.css";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -15,69 +18,61 @@ const SignupForm = () => {
     branch: '',
   });
 
-  const [userId, setUserId] = useState(null); // State to store user ID
-  const [userEmail, setUserEmail] = useState(''); // State to store user email
+  const [userId, setUserId] = useState(null);
+  const [userEmail, setUserEmail] = useState('');
   const router = useRouter();
 
-  // Check user authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUserId(user.uid); // Set the user ID if the user is authenticated
-        setUserEmail(user.email); // Set the user email from Google Authentication
+        setUserId(user.uid);
+        setUserEmail(user.email);
       } else {
-        console.log('No user is signed in.');
-        router.push('/invalid-entry'); // Change to your login route
+        router.push('/invalid-entry');
       }
     });
 
-    return () => unsubscribe(); // Clean up the listener on component unmount
+    return () => unsubscribe();
   }, [router]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const enrollment_no = formData.enrollment;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!userId) {
       alert('User is not authenticated. Please log in again.');
       return;
     }
-  
-    // Validate phone number
+
     if (formData.phone.length !== 10) {
       alert('Phone number must be 10 digits long.');
       return;
     }
-  
+
     try {
-      // Check if the user has already submitted the form
-      const userDocRef = doc(db, 'users', userId); // Assuming you have a users collection
+      const userDocRef = doc(db, 'users', userId);
       const userDoc = await getDoc(userDocRef);
-  
+
       if (userDoc.exists() && userDoc.data().hasSubmitted) {
-        alert('You have already submitted the form.');
-        await signOut(auth); // Sign out the user
-        router.push('/login'); // Redirect to your desired route
-        return; // Prevent further execution
+        alert('Form already submitted.');
+        await signOut(auth);
+        router.push('/login');
+        return;
       }
-  
-      // Check if the enrollment number already exists in Firestore
+
       const studentDocRef = doc(db, 'recruitment-phase1', formData.enrollment);
       const studentDoc = await getDoc(studentDocRef);
-  
+
       if (studentDoc.exists()) {
-        alert('This enrollment number has already been submitted.');
-        await signOut(auth); // Sign out the user
-        router.push('/login'); // Redirect to your desired route
-        return; // Prevent further execution
+        alert('Enrollment number already submitted.');
+        await signOut(auth);
+        router.push('/login');
+        return;
       }
-  
-      // Store user data in Firestore
+
       await setDoc(studentDocRef, {
         Name: formData.name,
         EnrollmentNumber: formData.enrollment,
@@ -87,93 +82,89 @@ const SignupForm = () => {
         Email: userEmail,
         UserId: userId,
       });
-  
-      // Update user's submission status
+
       await setDoc(userDocRef, { hasSubmitted: true }, { merge: true });
-  
-      // Show success alert
+
       alert('Details successfully submitted!');
-  
-      // Sign out the user
       await signOut(auth);
-      router.push('/login'); // Change to your desired route
-  
+      router.push('/login');
+
     } catch (error) {
       console.error('Error saving details:', error);
-  
-      // Check if the student document exists
-      const studentDoc = await getDoc(studentDocRef);
-      
-      // If no entry is found with the enrollment number
-      if (!studentDoc.exists()) {
-        alert('No entry found with your enrollment number. Please try again.'); // Redirect to Google Auth
-        router.push('/login'); // Change to your Google Auth route
-      } else {
-        alert('Error saving details. Please try again.'); // Show error alert
-      }
+      alert('Error saving details. Try again.');
     }
   };
 
   return (
-    <div className={styles.formContainer}>
-      <h2 className={styles.formTitle}>Signup Form</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          className={styles.input}
-          type="text"
-          name="name"
-          placeholder="Name"
-          onChange={handleChange}
-          required
-        />
-        <input
-          className={styles.input}
-          type="text"
-          name="enrollment"
-          placeholder="Enrollment Number (xxxxxxxxxxx)"
-          pattern="^[0-9]{11}$"
-          onChange={handleChange}
-          required
-        />
-        <input
-          className={styles.input}
-          type="tel"
-          name="phone"
-          placeholder="Phone Number (10 digits)"
-          pattern="^[0-9]{10}$"
-          onChange={handleChange}
-          required
-        />
-        <select
-          className={styles.select}
-          name="year"
-          onChange={handleChange}
-          required
-        >
-          <option value="" disabled selected>Select Year</option>
-          <option value="2026">2026</option>
-          <option value="2027">2027</option>
-          <option value="2028">2028</option>
-        </select>
-        <select
-          className={styles.select}
-          name="branch"
-          onChange={handleChange}
-          required
-        >
-          <option value="" disabled selected>Select Branch</option>
-          <option value="CSE-AI">CSE-AI</option>
-          <option value="CSE">CSE</option>
-          <option value="ECE-AI">ECE-AI</option>
-          <option value="ECE">ECE</option>
-          <option value="IT">IT</option>
-          <option value="AI-ML">AI-ML</option>
-          <option value="MAE">MAE</option>
-          <option value="DMAM">DMAM</option>
-        </select>
-        <button className={styles.button} type="submit">Submit</button>
-      </form>
-    </div>
+    <>
+      <Head>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet" />
+      </Head>
+      <div className={styles.container}>
+        <div className={styles.formWrapper}>
+          <h2 className={styles.title}>Signup Form</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              className={styles.input}
+              type="text"
+              name="name"
+              placeholder="Name"
+              onChange={handleChange}
+              required
+            />
+            <input
+              className={styles.input}
+              type="text"
+              name="enrollment"
+              placeholder="Enrollment Number (xxxxxxxxxxx)"
+              pattern="^[0-9]{11}$"
+              onChange={handleChange}
+              required
+            />
+            <input
+              className={styles.input}
+              type="tel"
+              name="phone"
+              placeholder="Phone Number (10 digits)"
+              pattern="^[0-9]{10}$"
+              onChange={handleChange}
+              required
+            />
+            <div className={styles.inlineFields}>
+              <select
+                className={`${styles.select} ${styles.inlineField}`}
+                name="year"
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled selected>Select Year</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+              </select>
+              <select
+                className={`${styles.select} ${styles.inlineField}`}
+                name="branch"
+                onChange={handleChange}
+                required
+              >
+                <option value="" disabled selected>Select Branch</option>
+                <option value="CSE-AI">CSE-AI</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE-AI">ECE-AI</option>
+                <option value="ECE">ECE</option>
+                <option value="IT">IT</option>
+                <option value="AI-ML">AI-ML</option>
+                <option value="MAE">MAE</option>
+                <option value="DMAM">DMAM</option>
+              </select>
+            </div>
+            <button className={styles.button} type="submit">Submit</button>
+          </form>
+        </div>
+        <footer className={styles.footer}>© 2024 Celestial Biscuit</footer>
+      </div>
+    </>
   );
 };
 
