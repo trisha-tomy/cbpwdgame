@@ -1,4 +1,5 @@
 import "./globals.css"
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
   title: 'Genesis',
@@ -11,7 +12,10 @@ export default function RootLayout({ children }) {
       <head>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet'/>
       </head>
-      <body>{children}</body>
+     <body>
+       {children}
+       <Analytics />
+     </body>
     </html>
   )
 }
