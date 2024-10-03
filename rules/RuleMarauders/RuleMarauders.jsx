@@ -15,6 +15,7 @@ export default class RuleMarauders extends Rule {
     }
 
     check(txt) {
-        return this.solution.some(answer => new RegExp(`\\b${answer}\\b`, "i").test(txt));
+        // Check if any solution word is found in the text, ignoring case
+        return this.solution.some(answer => new RegExp(answer, "i").test(txt));
     }
 }

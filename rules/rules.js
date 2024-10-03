@@ -20,14 +20,14 @@ var rules = [
         "Your password must include an uppercase and a lowercase letter.",
         (t) => (/[A-Z]/.test(t) && /[a-z]/.test(t))
     ),
-    new Rule( 
+    new Rule(
         "Your password must include a special character.",
-        (t) => /\W/.test(t)
-    ),
-    new Rule( 
+        (t) => /[\W_]/.test(t)
+    ),    
+    new Rule(
         "Your password must include a negative number.",
-        (t) => /-\d/.test(t)
-    ),
+        (t) => /-(?!0)\d/.test(t)
+    ),    
 
     new RuleSum(),
 
@@ -77,7 +77,7 @@ var rules = [
 
     new Rule( 
         "Your password must include what you experience when you miss out on joining Celestial Biscuit.",
-        (t) => /fomo|fearofmissingout/i.test(t)
+        (t) => /fomo|fearofmissingout|fear of missing out/i.test(t)
     ),
 
     new RuleMarauders()
