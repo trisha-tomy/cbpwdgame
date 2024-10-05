@@ -20,6 +20,51 @@ export default function Home() {
 
   const router = useRouter(); // Initialize useRouter for redirection
 
+
+  useEffect(() => {
+    // Disable right-click
+    document.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+    });
+
+    // Disable F12 and Ctrl+Shift+I
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+        event.preventDefault();
+      }
+    });
+
+    // Monitor console access
+    let devtoolsOpen = false;
+    const element = new window.Image(); // Use the native Image constructor
+    Object.defineProperty(element, 'id', {
+      get: function () {
+        devtoolsOpen = true;
+      }
+    });
+
+    setInterval(() => {
+      devtoolsOpen = false;
+      console.log(element);
+      if (devtoolsOpen) {
+        alert('Please do not inspect the page.');
+      }
+    }, 1000);
+
+    return () => {
+      // Clean up event listeners
+      document.removeEventListener('contextmenu', (event) => {
+        event.preventDefault();
+      });
+      document.removeEventListener('keydown', (event) => {
+        if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+          event.preventDefault();
+        }
+      });
+    };
+  }, []);
+
+
   // Initialization of rule numbers
   useEffect(() => {
     for (let i = 0; i < ruleList.length; i++) {
