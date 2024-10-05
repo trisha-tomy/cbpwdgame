@@ -19,12 +19,12 @@ function get_random_wordle(){
 
 export default class RuleWordle extends Rule{
     constructor(){
-        super("Your password must contain the answer to this Wordle (Hint: think CB and IGDTUW ;) )");
+        super("Your password must contain the answer to ");
         
         let selectedWordle = get_random_wordle();
         this.solution = selectedWordle.solution;
         
-        this.renderItem = () => <span><a href={selectedWordle.url} target="_blank">Wordle</a> answer.</span>;
+        this.renderItem = () => <span><a href={selectedWordle.url} target="_blank">this Wordle </a> (Hint: think CB and IGDTUW ;))</span>;
     }
 
     check(txt){
