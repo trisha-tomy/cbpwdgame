@@ -6,7 +6,6 @@ export default class RuleRickroll extends Rule {
 
         this.solution = "rickroll";  // The correct answer is "rickroll"
 
-        // Make the word 'link' clickable and redirect to the Rickroll video
         this.renderItem = () => (
             <span>
                 <a href="https://bit.ly/cb-exp-24" target="_blank">link</a> lies a memorable experience. To proceed, your password must feature the name of that moment.
@@ -15,7 +14,8 @@ export default class RuleRickroll extends Rule {
     }
 
     check(txt) {
-        let r = new RegExp(`(${this.solution})`, "i");
+        // Adjust the regex to allow "rickroll" or "rick roll" (with or without space)
+        let r = new RegExp(`(rick\\s*roll)`, "i");
         return r.test(txt); 
     }
 }

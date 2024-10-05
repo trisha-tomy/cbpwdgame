@@ -15,6 +15,7 @@ export default class Rule3Idiots extends Rule {
     }
 
     check(txt) {
-        return this.solution.some(answer => new RegExp(`\\b${answer}\\b`, "i").test(txt));
+        // Direct match without word boundaries, case-insensitive
+        return this.solution.some(answer => new RegExp(answer, "i").test(txt));
     }
 }
