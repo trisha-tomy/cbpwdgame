@@ -1,0 +1,153 @@
+/* SignupForm.module.css */
+
+/* Container and form wrapper styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(20, 20, 30, 0.8);
+  /* Same background tone as the original */
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.2);
+  /* Match shadow from the original */
+  backdrop-filter: blur(15px);
+  /* Match blur effect */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  /* Matching font from the original */
+  font-size: 30px;
+  /* Adjusted to match the original */
+  font-weight: bold;
+  color: #f0f0f0;
+  /* White color consistent with original */
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.3);
+  /* Same glow effect */
+}
+
+/* Input and Select Fields */
+.input,
+.button {
+  width: 94%;
+  max-width: 400px;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  /* Consistent border color */
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  ;
+  font-family: 'Quicksand', sans-serif;
+  /* Matching font */
+}
+
+/* Placeholder and select styling */
+.input::placeholder,
+.select option {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.select {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Styling for inline fields */
+.inlineFields {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  gap: 10px;
+}
+
+.inlineField {
+  flex: 1;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Quicksand', sans-serif;
+  /* Matching font */
+}
+
+/* Submit button styling */
+.button {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #2a3d55;
+  /* Deeper celestial blue from original */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 0 10px rgba(42, 61, 85, 0.5);
+  /* Match the glowing effect */
+}
+
+.button:hover {
+  background-color: #355273;
+  /* Lighter blue on hover */
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(53, 82, 115, 0.7);
+}
+
+/* Footer styling */
+.footer {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  color: #a0a0a0;
+  text-align: center;
+  padding-top: 20px;
+  text-shadow: 0 0 5px rgba(160, 160, 160, 0.5);
+  z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .formWrapper {
+    padding: 20px;
+    margin: auto;
+    width: 80%;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .input,
+  .select,
+  .button {
+    font-size: 14px;
+  }
+
+  .inlineFields {
+    flex-direction: column;
+    gap: 0;
+  }
+}
