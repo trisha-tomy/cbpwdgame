@@ -28,7 +28,7 @@ const SignupForm = () => {
         setUserId(user.uid);
         setUserEmail(user.email);
       } else {
-        router.push('/invalid-entry');
+        router.push('https://celestialbiscuit.vercel.app/');
       }
     });
 
@@ -59,7 +59,7 @@ const SignupForm = () => {
       if (userDoc.exists() && userDoc.data().hasSubmitted) {
         alert('Form already submitted.');
         await signOut(auth);
-        router.push('/login');
+        router.push('https://celestialbiscuit.vercel.app/');
         return;
       }
 
@@ -69,7 +69,7 @@ const SignupForm = () => {
       if (studentDoc.exists()) {
         alert('Enrollment number already submitted.');
         await signOut(auth);
-        router.push('/login');
+        router.push('https://celestialbiscuit.vercel.app/');
         return;
       }
 
@@ -87,7 +87,7 @@ const SignupForm = () => {
 
       alert('Details successfully submitted!');
       await signOut(auth);
-      router.push('/login');
+      router.push('https://celestialbiscuit.vercel.app/');
 
     } catch (error) {
       console.error('Error saving details:', error);

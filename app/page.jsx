@@ -1,199 +1,34 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { useRouter } from 'next/navigation'; // Import the useRouter hook for redirection
+import React from 'react';
+import { useRouter } from 'next/navigation'; // Use Next.js router for navigation
+import styles from './Storyline.module.css'; // Import the corresponding CSS
 
-import styles from './page.module.css';
-import PasswordBox from '../components/PasswordBox';
-import RuleBox from '../components/RuleBox';
-import ruleList, { sort_rules } from '../rules/rules';
+const Storyline = () => {
+  const router = useRouter(); // Initialize the router
 
-export default function Home() {
-  const [pswd, setPswd] = useState('');
-  const [ruleState, setRuleState] = useState([]);
-  const max_unlocked_rules = useRef(0);
-  const pswdBoxRef = useRef(null);
-  const [aaParent, aaEnableAnimations] = useAutoAnimate();
-  const [allSolved, setAllSolved] = useState(false);
-
-  const router = useRouter(); // Initialize useRouter for redirection
-
-
-  useEffect(() => {
-    // Disable right-click
-    document.addEventListener('contextmenu', (event) => {
-      event.preventDefault();
-    });
-
-    // Disable F12 and Ctrl+Shift+I
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
-        event.preventDefault();
-      }
-    });
-
-    // Monitor console access
-    let devtoolsOpen = false;
-    const element = new window.Image(); // Use the native Image constructor
-    Object.defineProperty(element, 'id', {
-      get: function () {
-        devtoolsOpen = true;
-      }
-    });
-
-    setInterval(() => {
-      devtoolsOpen = false;
-      console.log(element);
-      if (devtoolsOpen) {
-        alert('Please do not inspect the page.');
-      }
-    }, 1000);
-
-    return () => {
-      // Clean up event listeners
-      document.removeEventListener('contextmenu', (event) => {
-        event.preventDefault();
-      });
-      document.removeEventListener('keydown', (event) => {
-        if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
-          event.preventDefault();
-        }
-      });
-    };
-  }, []);
-
-
-  // Initialization of rule numbers
-  useEffect(() => {
-    for (let i = 0; i < ruleList.length; i++) {
-      ruleList[i].num = i + 1;
-    }
-    max_unlocked_rules.current = 0;
-    setRuleState(ruleList);
-  }, []);
-
-  // Callback on textbox change, check rules along with setPswd
-  function setPswdAndCheckRules(txt) {
-    setPswd(txt);
-    checkRules(txt);
-  }
-
-  // Check rules loop
-  function checkRules(txt) {
-    if (ruleState.length === 0) return;
-
-    let rules = [...ruleState];
-
-    // Base case, first rule
-    if (!rules[0].unlocked && txt.length > 0) {
-      rules[0].unlocked = true;
-      max_unlocked_rules.current++;
-    }
-
-    let solved_count = 0;
-    for (let i = 0; i < rules.length; i++) {
-      if (i === max_unlocked_rules.current) {
-        if (solved_count === max_unlocked_rules.current) {
-          rules[i].unlocked = true;
-          max_unlocked_rules.current++;
-        } else {
-          break;
-        }
-      }
-
-      rules[i].correct = rules[i].check(txt);
-      if (rules[i].correct) {
-        solved_count++;
-      }
-    }
-
-    setRuleState(rules);
-    if (solved_count === rules.length) {
-      setAllSolved(true);
-      
-      // Delay redirect by 5 seconds after the message is shown
-      setTimeout(() => {
-        router.push('/GoogleAuth'); // Redirect to signup page
-      }, 3000); // 5 second delay
-    } else {
-      setAllSolved(false);
-    }
-  }
-
-  function shakePasswordBox(boolean) {
-    if (boolean) {
-      pswdBoxRef.current.classList.add('shake');
-    } else {
-      pswdBoxRef.current.classList.remove('shake');
-    }
-  }
-
-  function regenerateRule(num) {
-    console.log('regenerate', num);
-    num--; // Change to rule index
-    let rules = [...ruleState];
-    if ('regenerate' in rules[num]) {
-      rules[num].regenerate();
-      setRuleState(rules);
-    }
-  }
+  const handleStartGame = () => {
+    router.push('/PasswordGame'); // Redirect to the password game page
+  };
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.title}>
-          <Image src="/cb_icon_biscuit.svg" width={60} height={110} alt="" />
-          <div className={styles.title_text}>CELESTIAL BISCUIT</div>
-        </div>
-
-        <PasswordBox pswd={pswd} setPswd={setPswdAndCheckRules} ref={pswdBoxRef} />
-        <div style={{ color: 'white' }}>Level: {max_unlocked_rules.current}</div>
-        <div ref={aaParent}>
-          {allSolved && (
-            <RuleBox
-              heading={'Congratulations!'}
-              msg={'You have successfully created a password. 🎉🎉'}
-              correct={true}
-            />
-          )}
-          {ruleState
-            .filter((r) => r.unlocked)
-            .sort(sort_rules)
-            .map((r) => {
-              return (
-                <RuleBox
-                  key={r.num}
-                  heading={`Rule ${r.num}`}
-                  msg={r.msg}
-                  correct={r.correct}
-                  renderItem={r.renderItem}
-                  propsToChild={{
-                    pswd,
-                    setPswd: setPswdAndCheckRules,
-                    shakePasswordBox,
-                    regenerateRule,
-                    correct: r.correct,
-                  }}
-                />
-              );
-            })}
-        </div>
+    <div className={styles.container}>
+      <div className={styles.storyContent}>
+        <h1 className={styles.title}>GENESIS</h1>
+        <p className={styles.paragraph}>
+          Celestial Biscuit contains ancient and rare knowledge—only accessible by those worthy of the club's secrets. 
+          The Guardians have set complex password puzzles to protect this knowledge. You’ve been chosen to face the trials and crack the password, 
+          gaining access to the wisdom of the celestial founders, the key to being in the top 1%.
+        </p>
+        <p className={styles.paragraph}>
+          Are you ready to unlock the secrets?
+        </p>
+        <button className={styles.startButton} onClick={handleStartGame}>
+          Begin!
+        </button>
       </div>
-      <footer className={styles.footer}>
-        CELESTIAL BISCUIT IGDTUW ⓒ 2024
-        <br />
-        This site is inspired by&nbsp;
-        <a href="https://neal.fun/password-game/" target="_blank">
-          The Password Game
-        </a>
-        &nbsp; and &nbsp;
-        <a href="https://quirkylock.netlify.app/" target="_blank">
-          QuirkyLock
-        </a>
-        <br />
-      </footer>
-    </>
+    </div>
   );
-}
+};
+
+export default Storyline;
