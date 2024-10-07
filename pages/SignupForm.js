@@ -20,13 +20,24 @@ const SignupForm = () => {
 
   const [userId, setUserId] = useState(null);
   const [userEmail, setUserEmail] = useState('');
+  const [gameCompleted, setGameCompleted] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUserId(user.uid);
         setUserEmail(user.email);
+        
+        // Check if the game has been completed
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists() && userDoc.data().gameCompleted) {
+          setGameCompleted(true);
+        } else {
+          // If game not completed, redirect to the game page
+          router.push('/PasswordGame');
+        }
       } else {
         router.push('https://celestialbiscuit.vercel.app/');
       }
@@ -44,6 +55,11 @@ const SignupForm = () => {
 
     if (!userId) {
       alert('User is not authenticated. Please log in again.');
+      return;
+    }
+
+    if (!gameCompleted) {
+      alert('Please complete the game before submitting the form.');
       return;
     }
 
@@ -94,6 +110,10 @@ const SignupForm = () => {
       alert('Error saving details. Try again.');
     }
   };
+
+  if (!gameCompleted) {
+    return <div>Please complete the game before filling out this form.</div>;
+  }
 
   return (
     <>

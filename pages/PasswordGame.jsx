@@ -1,10 +1,10 @@
 'use client';
-
 import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { auth, db } from '../utils/firebaseConfig';
+import { doc, setDoc } from 'firebase/firestore';
 import Image from 'next/image';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { useRouter } from 'next/navigation'; // Import the useRouter hook for redirection
-
 import styles from '../app/page.module.css';
 import PasswordBox from '../components/PasswordBox';
 import RuleBox from '../components/RuleBox';
@@ -113,13 +113,26 @@ export default function Home() {
     setRuleState(rules);
     if (solved_count === rules.length) {
       setAllSolved(true);
-      
-      // Delay redirect by 5 seconds after the message is shown
-      setTimeout(() => {
-        router.push('/GoogleAuth'); // Redirect to signup page
-      }, 1500); // 5 second delay
+      handleGameCompletion();
     } else {
       setAllSolved(false);
+    }
+  }
+
+  async function handleGameCompletion() {
+    const user = auth.currentUser;
+    if (user) {
+      const userDocRef = doc(db, 'users', user.uid);
+      await setDoc(userDocRef, { gameCompleted: true }, { merge: true });
+      
+      // Delay redirect by 1.5 seconds after the message is shown
+      setTimeout(() => {
+        router.push('/Congratulations');
+      }, 1500);
+    } else {
+      alert('You are not logged in.');
+      router.push('https://cb-genesis.vercel.app/');
+      console.error('User not authenticated');
     }
   }
 

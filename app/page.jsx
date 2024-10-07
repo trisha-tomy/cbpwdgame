@@ -1,16 +1,8 @@
-'use client';
+// app/page.jsx
+import StorylineClient from './StorylineClient.jsx';
+import styles from './Storyline.module.css';
 
-import React from 'react';
-import { useRouter } from 'next/navigation'; // Use Next.js router for navigation
-import styles from './Storyline.module.css'; // Import the corresponding CSS
-
-const Storyline = () => {
-  const router = useRouter(); // Initialize the router
-
-  const handleStartGame = () => {
-    router.push('/PasswordGame'); // Redirect to the password game page
-  };
-
+export default function Page() {
   return (
     <div className={styles.container}>
       <div className={styles.storyContent}>
@@ -23,12 +15,8 @@ const Storyline = () => {
         <p className={styles.paragraph}>
           Are you ready to unlock the secrets?
         </p>
-        <button className={styles.startButton} onClick={handleStartGame}>
-          Begin!
-        </button>
+        <StorylineClient />
       </div>
     </div>
   );
-};
-
-export default Storyline;
+}
