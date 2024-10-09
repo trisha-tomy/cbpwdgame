@@ -37,8 +37,12 @@ const GoogleAuthScreen = () => {
       </Head>
       <div className={styles.container}>
         <div className={styles.authContainer}>
-          <h1 className={styles.title}>Congratulations on cracking the password!</h1>
-          <p className={styles.introduction}>You are in the Celestial Biscuit!</p>
+          <h1 className={styles.title}>Congratulations, Meridian!</h1>
+          <p className={styles.introduction}>You&apos;ve successfully cracked the password and unlocked the key to becoming the best version of yourself. 
+            Welcome to Celestial Biscuit—the elite circle of the best of the best! 
+            Your journey through this exclusive knowledge is just beginning, and even more exciting secrets await your discovery!
+
+</p>
           <button className={styles.button} onClick={handleGoogleSignIn}>Sign in with Google</button>
         </div>
         <footer className={styles.footer}>© 2024 Celestial Biscuit</footer>

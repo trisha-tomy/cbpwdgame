@@ -8,7 +8,7 @@
   padding: 20px;
   box-sizing: border-box;
   background: linear-gradient(135deg, rgba(10, 10, 40, 0.9), rgba(30, 30, 60, 0.8), rgba(40, 40, 100, 0.9)),
-    url('./stars.png');
+    url('../public/stars.png');
   background-size: cover;
   background-position: center;
   background-blend-mode: overlay;
@@ -30,7 +30,7 @@
 }
 
 .title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Equinox', sans-serif;
   font-size: 30px;
   font-weight: bold;
   color: #f0f0f0;
@@ -40,7 +40,7 @@
 }
 
 .introduction {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-align: center;
   font-size: 16px;
   margin-bottom: 30px;
@@ -59,7 +59,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   box-shadow: 0 0 10px rgba(42, 61, 85, 0.5);
   /* Slight glow effect to enhance the celestial look */
 }
@@ -73,7 +73,7 @@
 }
 
 .footer {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Equinox', sans-serif;
   font-size: 13px;
   color: #a0a0a0;
   text-align: center;
